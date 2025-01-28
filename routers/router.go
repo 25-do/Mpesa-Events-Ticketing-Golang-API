@@ -6,14 +6,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRouter() *gin.Engine {
-	r := gin.Default()
-
-	// User routes
-	userGroup := r.Group("/users")
+func RegisterUserRoutes(routerGroup *gin.RouterGroup, userController *controllers.UserController) {
+	userRoutes := routerGroup.Group("/users")
 	{
-		userGroup.POST("/", controllers.CreateUser)
+		userRoutes.GET("/", userController.GetAllUsers)    // Route to get all users
+		userRoutes.GET("/:id", userController.GetUserByID) // Route to get a user by ID
 	}
-
-	return r
 }

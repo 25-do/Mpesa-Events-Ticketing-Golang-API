@@ -1,10 +1,34 @@
 package repositories
 
 import (
-	"ticketing-system/db"
 	"ticketing-system/models"
+
+	"gorm.io/gorm"
 )
 
-func CreateUser(user *models.User) error {
-	return db.DB.Create(user).Error
+// UserRepositoryInterface defines the methods the UserRepository must implement
+type UserRepositoryInterface interface {
+	FindAll() ([]models.User, error)
+	FindByID(id uint) (*models.User, error)
+}
+
+// UserRepository implements UserRepositoryInterface
+type UserRepository struct {
+	DB *gorm.DB
+}
+
+func NewUserRepository(db *gorm.DB) UserRepositoryInterface {
+	return &UserRepository{DB: db}
+}
+
+func (r *UserRepository) FindAll() ([]models.User, error) {
+	var users []models.User
+	err := r.DB.Find(&users).Error
+	return users, err
+}
+
+func (r *UserRepository) FindByID(id uint) (*models.User, error) {
+	var user models.User
+	err := r.DB.First(&user, id).Error
+	return &user, err
 }
