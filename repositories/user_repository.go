@@ -10,6 +10,7 @@ import (
 type UserRepositoryInterface interface {
 	FindAll() ([]models.User, error)
 	FindByID(id uint) (*models.User, error)
+	CreateUser(user *models.User) (*models.User, error)
 }
 
 // UserRepository implements UserRepositoryInterface
@@ -31,4 +32,11 @@ func (r *UserRepository) FindByID(id uint) (*models.User, error) {
 	var user models.User
 	err := r.DB.First(&user, id).Error
 	return &user, err
+}
+
+func (r *UserRepository) CreateUser(user *models.User) (*models.User, error) {
+	if err := r.DB.Create(user).Error; err != nil {
+		return nil, err
+	}
+	return user, nil
 }

@@ -3,6 +3,7 @@ package controllers
 import (
 	"net/http"
 	"strconv"
+	"ticketing-system/models"
 	"ticketing-system/services"
 
 	"github.com/gin-gonic/gin"
@@ -40,4 +41,24 @@ func (uc *UserController) GetUserByID(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, user)
+}
+
+func (ctrl *UserController) CreateUser(c *gin.Context) {
+	var user models.User
+
+	// Bind JSON input to the user model
+	if err := c.ShouldBindJSON(&user); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	// Call the service to create the user
+	newUser, err := ctrl.UserService.CreateUser(&user)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	// Respond with the created user
+	c.JSON(http.StatusCreated, newUser)
 }
