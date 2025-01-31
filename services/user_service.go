@@ -35,9 +35,10 @@ func (s *UserService) GetUserByID(id uint) (*models.User, error) {
 }
 
 func (s *UserService) CreateUser(user *models.User) (*models.User, error) {
-	// Example business logic: Ensure email and password are provided
-	if user.Email == "" || user.PasswordHash == "" {
-		return nil, errors.New("email and password are required")
+	// check if the email exists
+	email_check, err := s.UserRepo.EmailExits(user.Email)
+	if err == nil && email_check != nil {
+		return nil, errors.New("a user with that email already exists")
 	}
 
 	// Call the repository to save the user

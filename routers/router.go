@@ -11,5 +11,6 @@ func RegisterUserRoutes(routerGroup *gin.RouterGroup, userController *controller
 	{
 		userRoutes.GET("/", userController.GetAllUsers)    // Route to get all users
 		userRoutes.GET("/:id", userController.GetUserByID) // Route to get a user by ID
+		userRoutes.POST("/create", userController.CreateUser)
 	}
 }

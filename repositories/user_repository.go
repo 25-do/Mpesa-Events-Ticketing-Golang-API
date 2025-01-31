@@ -11,6 +11,7 @@ type UserRepositoryInterface interface {
 	FindAll() ([]models.User, error)
 	FindByID(id uint) (*models.User, error)
 	CreateUser(user *models.User) (*models.User, error)
+	EmailExits(email string) (*models.User, error)
 }
 
 // UserRepository implements UserRepositoryInterface
@@ -39,4 +40,12 @@ func (r *UserRepository) CreateUser(user *models.User) (*models.User, error) {
 		return nil, err
 	}
 	return user, nil
+}
+
+func (r *UserRepository) EmailExits(email string) (*models.User, error) {
+	var user models.User
+	if err := r.DB.Where("email = ?", email).First(&user).Error; err != nil {
+		return nil, err
+	}
+	return &user, nil
 }
