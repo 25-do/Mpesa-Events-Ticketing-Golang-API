@@ -24,6 +24,10 @@ func main() {
 	eventService := services.NewEventService(eventRepo)
 	eventController := controllers.NewEventController(eventService)
 
+	venueRepo := repositories.NewVenueRepository(db.DB)
+	venueService := services.NewVenueService(venueRepo)
+	venueController := controllers.NewVenueController(venueService)
+
 	// Initialize Gin router
 	r := gin.Default()
 
@@ -31,6 +35,7 @@ func main() {
 	api := r.Group("/api")
 	routers.RegisterUserRoutes(api, userController) // Register user routes
 	routers.EventRoutes(api, eventController)
+	routers.VenueRoutes(api, venueController)
 
 	// Start the server
 	r.Run(":8080")

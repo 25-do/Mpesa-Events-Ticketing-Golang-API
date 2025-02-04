@@ -7,11 +7,11 @@ import (
 )
 
 type VenueRepositoryInterface interface {
-	CreateVenue(event *models.Event) (*models.Event, error)
-	GetAllVenues() ([]models.Event, error)
-	// GetSingleVenue(id uint) (*models.Event, error)
-	// UpdateVenue(id uint) (*models.Event, error)
-	// DeleteVenue(id uint) (*models.Event, error)
+	CreateVenue(venue *models.Venue) (*models.Venue, error)
+	GetAllVenues() ([]models.Venue, error)
+	GetSingleVenue(id uint) ([]models.Venue, error)
+	UpdateVenue(id string) (*models.Venue, error)
+	DeleteVenue(id string) (*models.Venue, error)
 }
 
 type venueRepository struct {
@@ -21,20 +21,49 @@ type venueRepository struct {
 func NewVenueRepository(db *gorm.DB) VenueRepositoryInterface {
 	return &venueRepository{DB: db}
 }
-func (dc *venueRepository) CreateVenue(event *models.Event) (*models.Event, error) {
-	if err := dc.DB.Create(&event).Error; err != nil {
+func (dc *venueRepository) CreateVenue(venue *models.Venue) (*models.Venue, error) {
+	if err := dc.DB.Create(&venue).Error; err != nil {
 		return nil, err
 	}
 
-	return event, nil
+	return venue, nil
 }
 
-func (dc *venueRepository) GetAllVenues() ([]models.Event, error) {
-	var events []models.Event
-	if err := dc.DB.Find(&events).Error; err != nil {
+func (dc *venueRepository) GetAllVenues() ([]models.Venue, error) {
+	var venues []models.Venue
+	if err := dc.DB.Find(&venues).Error; err != nil {
 
-		return events, err
+		return venues, err
 	}
 
-	return events, nil
+	return venues, nil
+}
+
+func (dc *venueRepository) GetSingleVenue(id uint) ([]models.Venue, error) {
+	var venue []models.Venue
+	if err := dc.DB.Where("id = ?", id).First(&venue).Error; err != nil {
+		return nil, err
+	}
+	return venue, nil
+}
+
+func (dc *venueRepository) UpdateVenue(id string) (*models.Venue, error) {
+	var venue models.Venue
+	if err := dc.DB.Where("id=?", id).Updates(map[string]interface{}{
+		"name":     venue.Name,
+		"location": venue.Location,
+		"capacity": venue.Capacity}).Scan(&venue).Error; err != nil {
+		return nil, err
+
+	}
+	return &venue, nil
+}
+
+func (dc *venueRepository) DeleteVenue(id string) (*models.Venue, error) {
+	var venue models.Venue
+	if err := dc.DB.Where("id = ?", id).Delete(&venue).Error; err != nil {
+		return nil, err
+	}
+
+	return &venue, nil
 }
