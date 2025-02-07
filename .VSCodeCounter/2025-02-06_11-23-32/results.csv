@@ -1,0 +1,6 @@
+"filename", "language", "Go", "comment", "blank", "total"
+"/home/eric/Documents/zuvents/ticketing-system/controllers/evntcontroller.go", "Go", 86, 0, 10, 96
+"/home/eric/Documents/zuvents/ticketing-system/controllers/organizer_controller.go", "Go", 86, 0, 15, 101
+"/home/eric/Documents/zuvents/ticketing-system/controllers/user_controller.go", "Go", 49, 3, 13, 65
+"/home/eric/Documents/zuvents/ticketing-system/controllers/venue_controller.go", "Go", 86, 0, 15, 101
+"Total", "-", 307, 3, 53, 363

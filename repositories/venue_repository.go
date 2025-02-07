@@ -10,8 +10,8 @@ type VenueRepositoryInterface interface {
 	CreateVenue(venue *models.Venue) (*models.Venue, error)
 	GetAllVenues() ([]models.Venue, error)
 	GetSingleVenue(id uint) ([]models.Venue, error)
-	UpdateVenue(id string) (*models.Venue, error)
-	DeleteVenue(id string) (*models.Venue, error)
+	UpdateVenue(id uint, venue models.Venue) (*models.Venue, error)
+	DeleteVenue(id uint) (*models.Venue, error)
 }
 
 type venueRepository struct {
@@ -47,9 +47,9 @@ func (dc *venueRepository) GetSingleVenue(id uint) ([]models.Venue, error) {
 	return venue, nil
 }
 
-func (dc *venueRepository) UpdateVenue(id string) (*models.Venue, error) {
-	var venue models.Venue
-	if err := dc.DB.Where("id=?", id).Updates(map[string]interface{}{
+func (dc *venueRepository) UpdateVenue(id uint, venue models.Venue) (*models.Venue, error) {
+
+	if err := dc.DB.Model(&venue).Where("id=?", id).Updates(map[string]interface{}{
 		"name":     venue.Name,
 		"location": venue.Location,
 		"capacity": venue.Capacity}).Scan(&venue).Error; err != nil {
@@ -59,7 +59,7 @@ func (dc *venueRepository) UpdateVenue(id string) (*models.Venue, error) {
 	return &venue, nil
 }
 
-func (dc *venueRepository) DeleteVenue(id string) (*models.Venue, error) {
+func (dc *venueRepository) DeleteVenue(id uint) (*models.Venue, error) {
 	var venue models.Venue
 	if err := dc.DB.Where("id = ?", id).Delete(&venue).Error; err != nil {
 		return nil, err

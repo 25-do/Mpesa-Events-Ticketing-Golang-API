@@ -22,22 +22,29 @@ type Venue struct {
 	Capacity int    `json:"capacity"`
 }
 
+type Organizer struct {
+	gorm.Model
+	FirstName   string `json:"first_name" binding:"required,max=150"`
+	LastName    string `json:"last_name" binding:"required,max=150"`
+	PhoneNumber string `json:"phone_number" binding:"required,max=150"`
+	Email       string `json:"email" binding:"required,max=150"`
+}
 type Event struct {
 	gorm.Model
 	Name        string    `json:"name" binding:"required,max=150"`
 	Description string    `json:"description" binding:"required,max=350"`
-	VenueID     uint      `json:"venue_id"`
-	OrganizerID uint      `json:"organizer_id"`
+	VenueID     uint      `json:"venue_id" binding:"required"`
+	OrganizerID uint      `json:"organizer_id" binding:"required"`
 	StartTime   time.Time `json:"start_time" binding:"required"`
 	EndTime     time.Time `json:"end_time" binding:"required"`
-	IsFree      bool      `json:"is_free"`
+	IsFree      bool      `json:"is_free" binding:"required"`
 	ImageURL    string    `json:"image_url" binding:"required"`
 	TicketType  []TicketType
 }
 
 type TicketType struct {
 	gorm.Model
-	EventID           uint      `json:"event_id"`
+	EventID           uint      `json:"event_id" binding:"required"`
 	Name              string    `json:"name" binding:"required,max=150"`
 	Price             float64   `json:"price" binding:"required"`
 	AvailableQuantity int       `json:"available_quantity"`

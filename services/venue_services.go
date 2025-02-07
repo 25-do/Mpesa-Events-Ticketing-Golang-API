@@ -10,8 +10,8 @@ type VenueServiceInterface interface {
 	CreateVenue(venue *models.Venue) (*models.Venue, error)
 	GetAllVenues() ([]models.Venue, error)
 	GetSingleVenue(id uint) ([]models.Venue, error)
-	UpdateVenue(id string) (*models.Venue, error)
-	DeleteVenue(id string) (*models.Venue, error)
+	UpdateVenue(id uint, venue models.Venue) (*models.Venue, error)
+	DeleteVenue(id uint) (*models.Venue, error)
 }
 
 // VenueService implements VenueServiceInterface
@@ -35,10 +35,10 @@ func (s *VenueService) GetSingleVenue(id uint) ([]models.Venue, error) {
 	return s.VenueRepo.GetSingleVenue(id)
 }
 
-func (s *VenueService) UpdateVenue(id string) (*models.Venue, error) {
-	return s.VenueRepo.UpdateVenue(id)
+func (s *VenueService) UpdateVenue(id uint, venue models.Venue) (*models.Venue, error) {
+	return s.VenueRepo.UpdateVenue(id, venue)
 }
 
-func (s *VenueService) DeleteVenue(id string) (*models.Venue, error) {
+func (s *VenueService) DeleteVenue(id uint) (*models.Venue, error) {
 	return s.VenueRepo.DeleteVenue(id)
 }

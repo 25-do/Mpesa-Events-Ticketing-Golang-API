@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 	"ticketing-system/models"
@@ -46,10 +47,11 @@ func (ctrl *VenueController) GetAllVenues(c *gin.Context) {
 }
 
 func (ctrl *VenueController) GetSingleVenue(c *gin.Context) {
-	idParam := c.Param("id")
+	idParam := c.Query("id")
+	fmt.Println(idParam)
 	id, err := strconv.Atoi(idParam)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	venue, err := ctrl.VenueService.GetSingleVenue(uint(id))
@@ -61,18 +63,35 @@ func (ctrl *VenueController) GetSingleVenue(c *gin.Context) {
 }
 
 func (ctrl *VenueController) UpdateVenue(c *gin.Context) {
-	id := c.Param("id")
-	venue, err := ctrl.VenueService.UpdateVenue(id)
+	var ven models.Venue
+	idParam := c.Query("id")
+	fmt.Println(idParam)
+	id, err := strconv.Atoi(idParam)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update venue"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "an error occured check your Query parameters"})
+		return
+	}
+	if err := c.ShouldBindJSON(&ven); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	venue, err := ctrl.VenueService.UpdateVenue(uint(id), ven)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "an error occured while updating the venue"})
 		return
 	}
 	c.JSON(http.StatusOK, venue)
 }
 
 func (ctrl *VenueController) DeleteVenue(c *gin.Context) {
-	id := c.Param("id")
-	venue, err := ctrl.VenueService.DeleteVenue(id)
+	idParam := c.Query("id")
+	fmt.Println(idParam)
+	id, err := strconv.Atoi(idParam)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	venue, err := ctrl.VenueService.DeleteVenue(uint(id))
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete venue"})
 		return

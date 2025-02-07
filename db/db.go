@@ -50,6 +50,7 @@ func MigrateTables() {
 		&models.TicketType{},
 		&models.Ticket{},
 		&models.Payment{},
+		&models.Organizer{},
 	)
 	if err != nil {
 		log.Fatal("Failed to migrate tables:", err)

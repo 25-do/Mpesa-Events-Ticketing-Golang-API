@@ -1,0 +1,36 @@
+Date : 2025-02-06 11:23:07
+Directory : /home/eric/Documents/zuvents/ticketing-system/routers
+Total : 9 files,  -74 codes, -8 comments, -23 blanks, all -105 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Go       |          9 |        -74 |         -8 |        -23 |       -105 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                         | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                            |          9 |        -74 |         -8 |        -23 |       -105 |
+| . (Files)                                                                    |          5 |         59 |          0 |         17 |         76 |
+| ..                                                                           |          4 |       -133 |         -8 |        -40 |       -181 |
+| ../services                                                                  |          4 |       -133 |         -8 |        -40 |       -181 |
++------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                     | language | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| /home/eric/Documents/zuvents/ticketing-system/routers/events_routers.go      | Go       |         15 |          0 |          4 |         19 |
+| /home/eric/Documents/zuvents/ticketing-system/routers/main_router.go         | Go       |          1 |          0 |          1 |          2 |
+| /home/eric/Documents/zuvents/ticketing-system/routers/organizer_routers.go   | Go       |         15 |          0 |          4 |         19 |
+| /home/eric/Documents/zuvents/ticketing-system/routers/router.go              | Go       |         13 |          0 |          4 |         17 |
+| /home/eric/Documents/zuvents/ticketing-system/routers/venue_routes.go        | Go       |         15 |          0 |          4 |         19 |
+| /home/eric/Documents/zuvents/ticketing-system/services/events_services.go    | Go       |        -33 |          0 |        -11 |        -44 |
+| /home/eric/Documents/zuvents/ticketing-system/services/organizer_services.go | Go       |        -33 |         -2 |        -10 |        -45 |
+| /home/eric/Documents/zuvents/ticketing-system/services/user_service.go       | Go       |        -34 |         -4 |         -9 |        -47 |
+| /home/eric/Documents/zuvents/ticketing-system/services/venue_services.go     | Go       |        -33 |         -2 |        -10 |        -45 |
+| Total                                                                        |          |        -74 |         -8 |        -23 |       -105 |
++------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

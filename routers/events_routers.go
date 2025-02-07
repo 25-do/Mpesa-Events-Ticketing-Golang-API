@@ -7,8 +7,12 @@ import (
 )
 
 func EventRoutes(router *gin.RouterGroup, eventController *controllers.EventController) {
-	userRoutes := router.Group("/events")
+	eventRoutes := router.Group("/event")
 	{
-		userRoutes.GET("/", eventController.GetAllEvents) // Route to get all users
+		eventRoutes.GET("/", eventController.GetAllEvents)
+		eventRoutes.POST("/create", eventController.CreateEvent)
+		eventRoutes.GET("/getSingle", eventController.GetSingleEvent)
+		eventRoutes.PUT("/update", eventController.UpdateEvent)
+		eventRoutes.DELETE("/delete", eventController.DeleteEvent)
 	}
 }

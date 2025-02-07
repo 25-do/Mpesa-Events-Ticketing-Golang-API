@@ -1,0 +1,7 @@
+"filename", "language", "Go", "comment", "blank", "total"
+"/home/eric/Documents/zuvents/ticketing-system/models/models.go", "Go", 63, 0, 10, 73
+"/home/eric/Documents/zuvents/ticketing-system/repositories/event_repository.go", "Go", -58, 0, -15, -73
+"/home/eric/Documents/zuvents/ticketing-system/repositories/organizer_repository.go", "Go", -55, 0, -16, -71
+"/home/eric/Documents/zuvents/ticketing-system/repositories/user_repository.go", "Go", -40, -2, -10, -52
+"/home/eric/Documents/zuvents/ticketing-system/repositories/venue_repository.go", "Go", -54, 0, -16, -70
+"Total", "-", -144, -2, -47, -193

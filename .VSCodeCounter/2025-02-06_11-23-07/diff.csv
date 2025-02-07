@@ -1,0 +1,11 @@
+"filename", "language", "Go", "comment", "blank", "total"
+"/home/eric/Documents/zuvents/ticketing-system/routers/events_routers.go", "Go", 15, 0, 4, 19
+"/home/eric/Documents/zuvents/ticketing-system/routers/main_router.go", "Go", 1, 0, 1, 2
+"/home/eric/Documents/zuvents/ticketing-system/routers/organizer_routers.go", "Go", 15, 0, 4, 19
+"/home/eric/Documents/zuvents/ticketing-system/routers/router.go", "Go", 13, 0, 4, 17
+"/home/eric/Documents/zuvents/ticketing-system/routers/venue_routes.go", "Go", 15, 0, 4, 19
+"/home/eric/Documents/zuvents/ticketing-system/services/events_services.go", "Go", -33, 0, -11, -44
+"/home/eric/Documents/zuvents/ticketing-system/services/organizer_services.go", "Go", -33, -2, -10, -45
+"/home/eric/Documents/zuvents/ticketing-system/services/user_service.go", "Go", -34, -4, -9, -47
+"/home/eric/Documents/zuvents/ticketing-system/services/venue_services.go", "Go", -33, -2, -10, -45
+"Total", "-", -74, -8, -23, -105
