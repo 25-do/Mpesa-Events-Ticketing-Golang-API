@@ -63,3 +63,11 @@ func (dc *paymentRepository) DeletePayment(id uint) (*models.Payment, error) {
 
 	return &payment, nil
 }
+
+func (dc *paymentRepository) OrganizerId(id uint) (*models.Payment, error) {
+	var payment models.Payment
+	if err := dc.DB.Where("organizer_id = ?", id).First(&payment).Scan(&payment).Error; err != nil {
+		return nil, err
+	}
+	return &payment, nil
+}

@@ -44,6 +44,7 @@ func (dc *PaymentService) GetAllPayments() ([]models.Payment, error) {
 }
 
 func (dc *PaymentService) CreatePayment(payment *models.Payment) (*models.Payment, error) {
+	MpesaOnlinePayment(payment.PhoneNumber)
 	return dc.PaymentRepo.CreatePayment(payment)
 }
 
@@ -118,8 +119,14 @@ func StoreAccessTokenInCache(access_token string) error {
 	return nil
 }
 
-func MpesaOnlinePayment() {
+func (s *PaymentService)MpesaOnlinePayment(phonenumber string) {
 	// get access token from cache
+	var org models.Organizer
+
+	var organizer models.Organizer
+	if err := s..First(&organizer, payment.OrganizerID).Error; err != nil {
+		return err
+	}
 	access_token, _ := cache.Get("access-token")
 	url := "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
 
@@ -130,11 +137,11 @@ func MpesaOnlinePayment() {
 
 	transactionType := "CustomerPayBillOnline"
 	amount := "1"
-	partyA := "254708374149"
+	partyA := phonenumber
 	partyB := "174379"
-	phoneNumber := "254708374149"
+	phoneNumber := phonenumber
 	callbackURL := "https://linnric.com"
-	accountReference := "Test"
+	accountReference := org.AccountReference
 	transactionDesc := "Test"
 
 	payload := []byte(fmt.Sprintf(`{

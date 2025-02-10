@@ -29,6 +29,7 @@ type Organizer struct {
 	PhoneNumber       string `json:"phone_number" binding:"required,max=150"`
 	TillPayBillNumber string `json:"till_paybill_number" binding:"required,max=150"`
 	Email             string `json:"email" binding:"required,max=150"`
+	AccountReference  string `json:"account_reference" binding:"required,max=150"`
 }
 type Event struct {
 	gorm.Model
@@ -65,7 +66,9 @@ type Ticket struct {
 type Payment struct {
 	gorm.Model
 	UserID        uint      `json:"user_id"`
+	OrganizerID   uint      `json:"organizer_id" binding:"required"`
 	TicketID      uint      `json:"ticket_id"`
+	PhoneNumber   string    `json:"phone_number" binding:"required,max=150"`
 	Amount        float64   `json:"amount"`
 	PaymentMethod string    `json:"payment_method"`
 	Status        string    `json:"status"`
