@@ -24,10 +24,11 @@ type Venue struct {
 
 type Organizer struct {
 	gorm.Model
-	FirstName   string `json:"first_name" binding:"required,max=150"`
-	LastName    string `json:"last_name" binding:"required,max=150"`
-	PhoneNumber string `json:"phone_number" binding:"required,max=150"`
-	Email       string `json:"email" binding:"required,max=150"`
+	FirstName         string `json:"first_name" binding:"required,max=150"`
+	LastName          string `json:"last_name" binding:"required,max=150"`
+	PhoneNumber       string `json:"phone_number" binding:"required,max=150"`
+	TillPayBillNumber string `json:"till_paybill_number" binding:"required,max=150"`
+	Email             string `json:"email" binding:"required,max=150"`
 }
 type Event struct {
 	gorm.Model
