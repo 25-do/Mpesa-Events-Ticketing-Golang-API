@@ -6,6 +6,8 @@ import (
 	"ticketing-system/repositories"
 	"ticketing-system/routers"
 	"ticketing-system/services"
+	"ticketing-system/utils"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -14,6 +16,7 @@ func main() {
 	// Connect to the database
 	db.ConnectDB()
 	db.MigrateTables()
+	utils.MpesaGetAccessToken()
 
 	// Initialize repository, service, and controller
 	userRepo := repositories.NewUserRepository(db.DB)
@@ -51,6 +54,12 @@ func main() {
 	routers.OrganizerRoutes(api, organizerController)
 	routers.TicketTypeRoutes(api, tickettypeController)
 	routers.PaymentRoutes(api, paymentController)
+	go func() {
+		for {
+			time.Sleep(50 * time.Minute)
+			utils.MpesaGetAccessToken()
+		}
+	}()
 
 	// Start the server
 	r.Run(":8080")

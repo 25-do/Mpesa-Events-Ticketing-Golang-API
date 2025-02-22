@@ -69,7 +69,7 @@ type Payment struct {
 	OrganizerID   uint      `json:"organizer_id" binding:"required"`
 	TicketID      uint      `json:"ticket_id"`
 	PhoneNumber   string    `json:"phone_number" binding:"required,max=150"`
-	Amount        float64   `json:"amount"`
+	Amount        string    `json:"amount"`
 	PaymentMethod string    `json:"payment_method"`
 	Status        string    `json:"status"`
 	PaymentTime   time.Time `json:"payment_time"`

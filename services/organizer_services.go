@@ -9,7 +9,7 @@ import (
 type OrganizerServiceInterface interface {
 	CreateOrganizer(organizer *models.Organizer) (*models.Organizer, error)
 	GetAllOrganizers() ([]models.Organizer, error)
-	GetSingleOrganizer(id uint) ([]models.Organizer, error)
+	GetSingleOrganizer(id uint) (*models.Organizer, error)
 	UpdateOrganizer(id uint, organizer models.Organizer) (*models.Organizer, error)
 	DeleteOrganizer(id uint) (*models.Organizer, error)
 }
@@ -31,7 +31,7 @@ func (s *OrganizerService) GetAllOrganizers() ([]models.Organizer, error) {
 	return s.OrganizerRepo.GetAllOrganizers()
 }
 
-func (s *OrganizerService) GetSingleOrganizer(id uint) ([]models.Organizer, error) {
+func (s *OrganizerService) GetSingleOrganizer(id uint) (*models.Organizer, error) {
 	return s.OrganizerRepo.GetSingleOrganizer(id)
 }
 

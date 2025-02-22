@@ -23,6 +23,11 @@ func (ctrl *PaymentController) CreatePayment(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	err := ctrl.PaymentService.MpesaOnlinePayment(venue.Amount, venue.PhoneNumber, venue.OrganizerID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
 
 	newPayment, err := ctrl.PaymentService.CreatePayment(&venue)
 

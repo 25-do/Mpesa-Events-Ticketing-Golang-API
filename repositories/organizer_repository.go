@@ -9,7 +9,7 @@ import (
 type OrganizerRepositoryInterface interface {
 	CreateOrganizer(organizer *models.Organizer) (*models.Organizer, error)
 	GetAllOrganizers() ([]models.Organizer, error)
-	GetSingleOrganizer(id uint) ([]models.Organizer, error)
+	GetSingleOrganizer(id uint) (*models.Organizer, error)
 	UpdateOrganizer(id uint, organizer models.Organizer) (*models.Organizer, error)
 	DeleteOrganizer(id uint) (*models.Organizer, error)
 }
@@ -39,21 +39,23 @@ func (dc *organizerRepository) GetAllOrganizers() ([]models.Organizer, error) {
 	return organizers, nil
 }
 
-func (dc *organizerRepository) GetSingleOrganizer(id uint) ([]models.Organizer, error) {
-	var organizer []models.Organizer
+func (dc *organizerRepository) GetSingleOrganizer(id uint) (*models.Organizer, error) {
+	var organizer models.Organizer
 	if err := dc.DB.Where("id = ?", id).First(&organizer).Error; err != nil {
 		return nil, err
 	}
-	return organizer, nil
+	return &organizer, nil
 }
 
 func (dc *organizerRepository) UpdateOrganizer(id uint, organizer models.Organizer) (*models.Organizer, error) {
 
 	if err := dc.DB.Model(&organizer).Where("id=?", id).Updates(map[string]interface{}{
-		"first_name":   organizer.FirstName,
-		"last_name":    organizer.LastName,
-		"phone_number": organizer.PhoneNumber,
-		"email":        organizer.Email}).Scan(&organizer).Error; err != nil {
+		"first_name":           organizer.FirstName,
+		"last_name":            organizer.LastName,
+		"phone_number":         organizer.PhoneNumber,
+		"email":                organizer.Email,
+		"till_pay_bill_number": organizer.TillPayBillNumber,
+		"account_reference":    organizer.AccountReference}).Scan(&organizer).Error; err != nil {
 		return nil, err
 
 	}

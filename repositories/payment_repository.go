@@ -12,6 +12,8 @@ type PaymentRepositoryInterface interface {
 	GetSinglePayment(id uint) ([]models.Payment, error)
 	UpdatePayment(id uint, payment models.Payment) (*models.Payment, error)
 	DeletePayment(id uint) (*models.Payment, error)
+	OrganizerId(id uint) (*models.Organizer, error)
+	MpesaOnlinePayment(phonenumber string, orgernizerId uint) error
 }
 
 type paymentRepository struct {
@@ -64,10 +66,14 @@ func (dc *paymentRepository) DeletePayment(id uint) (*models.Payment, error) {
 	return &payment, nil
 }
 
-func (dc *paymentRepository) OrganizerId(id uint) (*models.Payment, error) {
-	var payment models.Payment
-	if err := dc.DB.Where("organizer_id = ?", id).First(&payment).Scan(&payment).Error; err != nil {
+func (dc *paymentRepository) OrganizerId(id uint) (*models.Organizer, error) {
+	var organizer models.Organizer
+	if err := dc.DB.Where("id = ?", id).First(&organizer).Scan(&organizer).Error; err != nil {
 		return nil, err
 	}
-	return &payment, nil
+	return &organizer, nil
+}
+
+func (dc *paymentRepository) MpesaOnlinePayment(phonenumber string, orgernizerId uint) error {
+	return nil
 }
