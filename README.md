@@ -23,12 +23,14 @@ go mod tidy
 ### 3. Configure Environment Variables
 Create a `.env` file in the root directory and add:
 ```env
-DB_HOST=your_database_host
-DB_PORT=your_database_port
-DB_USER=your_database_user
-DB_PASSWORD=your_database_password
-DB_NAME=your_database_name
-CACHE_EXPIRY=59 # Access token expiry in minutes
+DB_HOST=localhost
+DB_USER=postgres
+DB_PASSWORD=password
+DB_NAME=name
+DB_PORT=5432
+username=daraja_API_CONSUMER_KEY
+password=daraja_API_CONSUMER_SECRET
+
 ```
 
 ### 4. Run Database Migrations (if applicable)
